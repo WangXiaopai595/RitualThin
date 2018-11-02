@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\www\RitualThin\public/../application/admin\view\index\index.html";i:1541171664;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -5,9 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>KIT ADMIN</title>
-    <link rel="stylesheet" href="__STYLE__/plugins/layui/css/layui.css" media="all">
-    <link rel="stylesheet" type="text/css" href="__STYLE__/css/boot.css">
-    <link rel="stylesheet" href="__STYLE__/build/css/app.css" media="all">
+    <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/boot.css">
+    <link rel="stylesheet" href="/static/admin/build/css/app.css" media="all">
 </head>
 
 <body>
@@ -31,14 +32,14 @@
             <ul class="layui-nav layui-layout-right kit-nav">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"> {$member.user}
+                        <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"> <?php echo $member['user']; ?>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">{$member.realname}</a></dd>
+                        <dd><a href="javascript:;"><?php echo $member['realname']; ?></a></dd>
                         <!--<dd><a href="javascript:;">安全设置</a></dd>-->
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="{:url('index/loginOut')}"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></li>
+                <li class="layui-nav-item"><a href="<?php echo url('index/loginOut'); ?>"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></li>
             </ul>
         </div>
 
@@ -47,25 +48,24 @@
                 <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
                 <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
-                	{volist name="menu" id="vo" key='k'}
-                		{if condition="$k eq 1"}
+                	<?php if(is_array($menu) || $menu instanceof \think\Collection || $menu instanceof \think\Paginator): $k = 0; $__LIST__ = $menu;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($k % 2 );++$k;if($k == 1): ?>
                 			<li class="layui-nav-item layui-nav-itemed">
-                		{else/}
+                		<?php else: ?>
                 			<li class="layui-nav-item">
-                		{/if}
-	                        <a class="" href="javascript:;"><i class="{$vo.micon}" aria-hidden="true"></i><span> {$vo.mname}</span></a>
+                		<?php endif; ?>
+	                        <a class="" href="javascript:;"><i class="<?php echo $vo['micon']; ?>" aria-hidden="true"></i><span> <?php echo $vo['mname']; ?></span></a>
 	                        <dl class="layui-nav-child">
-	                        	{volist name="vo['menu']" id="item" key='key'}
+	                        	<?php if(is_array($vo['menu']) || $vo['menu'] instanceof \think\Collection || $vo['menu'] instanceof \think\Paginator): $key = 0; $__LIST__ = $vo['menu'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($key % 2 );++$key;?>
 	                        		<dd>
-		                                <a href="javascript:;" data-url="{:url($item['url'])}" data-icon="{$item.cicon}" data-title="{$item.title}" kit-target data-id='{$k}{$key}'>
-		                                	<i class="{$item.icon}" aria-hidden="true"></i>
-		                                	<span> {$item.title}</span>
+		                                <a href="javascript:;" data-url="<?php echo url($item['url']); ?>" data-icon="<?php echo $item['cicon']; ?>" data-title="<?php echo $item['title']; ?>" kit-target data-id='<?php echo $k; ?><?php echo $key; ?>'>
+		                                	<i class="<?php echo $item['icon']; ?>" aria-hidden="true"></i>
+		                                	<span> <?php echo $item['title']; ?></span>
 		                                </a>
 		                            </dd>
-	                        	{/volist}
+	                        	<?php endforeach; endif; else: echo "" ;endif; ?>
 	                        </dl>
 	                    </li>
-                	{/volist}
+                	<?php endforeach; endif; else: echo "" ;endif; ?>
                     <!--<li class="layui-nav-item">
                         <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 表格(page)</span></a>
                     </li>
@@ -88,12 +88,12 @@
         </div>
     </div>
     
-    <script src="__STYLE__/js/jquery.min.js"></script>
-    <script src="__STYLE__/plugins/layui/layui.js"></script>
+    <script src="/static/admin/js/jquery.min.js"></script>
+    <script src="/static/admin/plugins/layui/layui.js"></script>
     <script>
         var message;
         layui.config({
-            base: '__STYLE__/build/js/'
+            base: '/static/admin/build/js/'
         }).use(['app', 'message'], function() {
             var app = layui.app,
                 $ = layui.jquery,
@@ -108,7 +108,7 @@
                 layer.open({
                     title: false,
                     type: 1,
-                    content: '<img src="__STYLE__/build/images/pay.png" />',
+                    content: '<img src="/static/admin/build/images/pay.png" />',
                     area: ['500px', '250px'],
                     shadeClose: true
                 });

@@ -1,0 +1,113 @@
+{include file="public/header" /}
+
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+	<legend>
+		<div class="layui-inline">
+			<a href="{:url('banner/index')}" class="layui-btn layui-btn-normal">返回列表</a>
+		</div>
+	</legend>
+</fieldset>
+
+<form class="layui-form" id="form">
+
+	<div class="layui-form-item">
+		<label class="layui-form-label">标题:</label>
+		<div class="layui-input-block" style="width: 50%;">
+			<input type="text" name="title" placeholder="" class="layui-input" value="{$banner['title']}">
+			<input type="hidden" name="id" placeholder="" class="layui-input" value="{$banner['id']}">
+		</div>
+		<div class="layui-form-mid layui-word-aux"></div>
+	</div>
+
+	<div class="layui-form-item">
+		<label class="layui-form-label">Banner图:</label>
+		<div class="layui-input-block" style="width: 50%;">
+			<img id="cover" style="width: 70px;height: 70px;" src="{$banner['path']}" />
+			<input id="img" type="file" accept="image/gif, image/jpeg, image/png, image/jpg" style="display: none;" name="path" />
+		</div>
+		<label class="layui-form-label"></label>
+		<!--<div class="layui-form-mid layui-word-aux">点击修改</div>-->
+	</div>
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">排序权重:</label>
+		<div class="layui-input-block" style="width: 50%;">
+			<input type="number" name="sort" autocomplete="off" placeholder="" class="layui-input" value="{$banner['sort']}">
+		</div>
+		<div class="layui-form-mid layui-word-aux"></div>
+	</div>
+	
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+			<button type="button" class="layui-btn" id="button" data-url='{:url("banner/updatebanner")}' data-succ='{:url("banner/index")}'>立即提交</button>
+		</div>
+	</div>
+	
+</form>
+{include file="public/footer" /}
+
+
+<script>
+	$(function(){
+		
+		
+		$("#cover").click(function(){
+	 		$("#img").click();
+	 	})
+	    $('#img').change(function() { 
+	        var html = '';
+			for(var i=0;i<(this.files).length;i++){
+				var file = this.files[i]; 
+		        var r = new FileReader(); 
+		        r.readAsDataURL(file);
+		        $(r).load(function() {
+		        	$("#cover").attr('src',this.result);
+		        }) 
+			}
+	    }) 
+		
+		
+		function checkForm(){
+			var title = $("input[name='title']").val();
+			
+			if(!title){
+				layer.msg('标题不能为空',{icon:0,time:1000});
+				return false;
+			}
+			
+			return true;
+		}
+		/**
+		 * ajax序列化提交表单
+		 */
+		$("#button").click(function(){
+			var succ = $(this).attr("data-succ");
+			var url = $(this).attr("data-url");
+			var data = new FormData($("#form")[0]); 
+			if(checkForm()){
+				$.ajax({ 
+				    url: url, 
+				    type: 'POST', 
+				    data: data, 
+				    async: false, 
+				    cache: false, 
+				    contentType: false, 
+				    processData: false, 
+				    success: function(date) {
+				    	if(date.status == 1){
+				    		layer.msg(date['msg'], {icon: 1,time:1000});
+				    		setTimeout(function(){
+								location.href = succ;
+							},700)
+				    	}else{
+				    		layer.msg(date['msg'], {icon: 2,time:1000});
+				    	}
+				    }
+				}); 
+			}
+		})
+	})
+	
+	layui.use(['form', 'layedit'], function() {});
+</script>

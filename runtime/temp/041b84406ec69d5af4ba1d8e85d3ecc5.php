@@ -1,4 +1,24 @@
-{include file="public/header" /}
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"D:\www\RitualThin\public/../application/admin\view\index\main.html";i:1541159293;s:59:"D:\www\RitualThin\application\admin\view\public\header.html";i:1517123229;s:59:"D:\www\RitualThin\application\admin\view\public\footer.html";i:1541171683;}*/ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台管理系统</title>
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/static/admin/css/bootstrap.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/static/admin/css/global.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/static/admin/css/personal.css" media="all">
+	<link rel="stylesheet" href="/static/admin/css/font_eolqem241z66flxr.css" media="all" />
+	<link rel="stylesheet" href="/static/admin/css/main.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/boot.css">
+</head>
+<body class="childrenBody">
 		<div class="panel_box row">
 			<div class="panel col">
 				<a href="javascript:;" data-url="page/message/message.html">
@@ -102,12 +122,12 @@
 						<!--<col>-->
 					<!--</colgroup>-->
 					<!--<tbody>-->
-						<!--{volist name="info" id="vo"}-->
+						<!--<?php if(is_array($info) || $info instanceof \think\Collection || $info instanceof \think\Paginator): $i = 0; $__LIST__ = $info;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>-->
 							<!--<tr>-->
-								<!--<td>{$key}</td>-->
-								<!--<td class="version">{$vo}</td>-->
+								<!--<td><?php echo $key; ?></td>-->
+								<!--<td class="version"><?php echo $vo; ?></td>-->
 							<!--</tr>-->
-						<!--{/volist}-->
+						<!--<?php endforeach; endif; else: echo "" ;endif; ?>-->
 					<!--</tbody>-->
 				<!--</table>-->
 				<!--&lt;!&ndash;<blockquote class="layui-elem-quote title">最新文章<i class="iconfont icon-new1"></i></blockquote>-->
@@ -120,4 +140,24 @@
 				<!--</table>&ndash;&gt;-->
 			<!--</div>-->
 		</div>
-{include file="public/footer" /} 
+<script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/layer.js"></script>
+<!--<script type="text/javascript" src="/static/admin/layui/layui.js"></script>-->
+<script type="text/javascript" src="/static/admin/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="//idm-su.baidu.com/su.js"></script>
+
+</body>
+</html>
+<script>
+	$(window).keydown(function(){
+		if ( event.keyCode==116){
+			event.keyCode = 0;
+			event.cancelBubble = true;
+			reload();
+			return  false;
+		}
+	})
+	function reload(){
+		location.reload();
+	}
+</script> 

@@ -7,13 +7,13 @@
 </body>
 </html>
 <script>
-	$(window).keydown(function(){ 
-		if ( event.keyCode==116){ 
-			event.keyCode = 0; 
-			event.cancelBubble = true; 
+	$(window).keydown(function(){
+		if ( event.keyCode==116){
+			event.keyCode = 0;
+			event.cancelBubble = true;
 			reload();
 			return  false;
-		} 
+		}
 	})
 	function reload(){
 		location.reload();
