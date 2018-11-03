@@ -1,0 +1,56 @@
+{include file="public/header" /}
+<section class="layui-larry-box">
+	<div class="larry-personal">
+		<div class="layui-tab">
+			<blockquote class="layui-elem-quote news_search">
+				<div class="layui-inline">
+					<form method="get">
+						<div class="layui-input-inline">
+							<input value="{$param['id']}" placeholder="请输入提醒id" name="id" class="layui-input search_input" type="text">
+						</div>
+						<div class="layui-input-inline">
+							<input value="{$param['uid']}" placeholder="请输入用户id" name="uid" class="layui-input search_input" type="text">
+						</div>
+						<button type="submit" class="layui-btn search_btn">查询</button>
+					</form>
+				</div>
+					
+			</blockquote>
+
+			<!-- 操作日志 -->
+			<div class="layui-form news_list">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>所属人</th>
+							<th>姓名</th>
+							<th>事项</th>
+							<th>金额</th>
+							<th>日期</th>
+							<th>关系</th>
+						</tr>
+					</thead>
+					<tbody class="news_content">
+						{volist name="Giftgive['list']" id="vo"}
+							<tr>
+								<td>{$vo.id}</td>
+								<td>{$vo.nick_name}(ID:{$vo.uid})</td>
+								<td>{$vo.name}</td>
+								<td>{$vo.matter}</td>
+								<td>{$vo.money}</td>
+								<td>{$vo.give_time|date='Y-m-d H:i',###}</td>
+								<td>{$vo.relation}</td>
+							</tr>
+						{/volist}
+					</tbody>
+				</table>
+				<div style="text-align: right;">
+					{$Giftgive.page}
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+{include file="public/footer" /}

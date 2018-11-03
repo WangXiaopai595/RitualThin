@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\www\RitualThin\public/../application/admin\view\group\addgroup.html";i:1517126020;s:59:"D:\www\RitualThin\application\admin\view\public\header.html";i:1517123229;s:59:"D:\www\RitualThin\application\admin\view\public\footer.html";i:1517123802;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\www\RitualThin\public/../application/admin\view\group\addgroup.html";i:1517126020;s:59:"D:\www\RitualThin\application\admin\view\public\header.html";i:1517123229;s:59:"D:\www\RitualThin\application\admin\view\public\footer.html";i:1541171683;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,13 +86,13 @@
 </body>
 </html>
 <script>
-	$(window).keydown(function(){ 
-		if ( event.keyCode==116){ 
-			event.keyCode = 0; 
-			event.cancelBubble = true; 
+	$(window).keydown(function(){
+		if ( event.keyCode==116){
+			event.keyCode = 0;
+			event.cancelBubble = true;
 			reload();
 			return  false;
-		} 
+		}
 	})
 	function reload(){
 		location.reload();

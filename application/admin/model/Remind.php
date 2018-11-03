@@ -57,7 +57,7 @@ class Remind extends Model
             ->join('__USER__ t1','t.uid=t1.id','left')
             ->where($map)
             ->field($field)
-            ->order('time desc')
+            ->order('start_time desc')
             ->paginate(10,false,$param);
         $result['page'] = $result['list']->render();
         return $result;
