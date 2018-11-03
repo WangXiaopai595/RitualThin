@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\www\RitualThin\public/../application/admin\view\index\index.html";i:1541171664;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\www\RitualThin\public/../application/admin\view\index\index.html";i:1541262604;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -119,11 +119,11 @@
 
 </html>
 <script>
-	$(window).keydown(function(){
-		if ( event.keyCode==116){
-			event.keyCode = 0;
-			event.cancelBubble = true;
-			return  false;
-		}
-	})
+//	$(window).keydown(function(){
+//		if ( event.keyCode==116){
+//			event.keyCode = 0;
+//			event.cancelBubble = true;
+//			return  false;
+//		}
+//	})
 </script>

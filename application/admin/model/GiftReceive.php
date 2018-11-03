@@ -33,4 +33,17 @@ class GiftReceive extends Model
     {
         return $this->commonModel->where($map)->count();
     }
+
+    /**
+     * 统计总金额
+     * created by:Mp_Lxj
+     * @date:2018/11/4 0:16
+     * @param $map
+     * @return float|int
+     */
+    public function getGiftReceiveSum($map)
+    {
+        return $this->commonModel->where($map)->sum('money');
+    }
+
 }

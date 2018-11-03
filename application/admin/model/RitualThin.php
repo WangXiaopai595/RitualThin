@@ -33,4 +33,36 @@ class RitualThin extends Model
     {
         return $this->commonModel->where($map)->count();
     }
+
+    /**
+     * 礼薄列表
+     * created by:Mp_Lxj
+     * @date:2018/11/4 0:11
+     * @param $param
+     * @return mixed
+     */
+    public function getRitualThinList($param){
+        $field = [
+            't.id','t.name','t.start_time','t.uid','t1.nick_name'
+        ];
+        $map = [];
+        if($param['id']){
+            $map['t.id'] = ['=',$param['id']];
+        }
+        if($param['uid']){
+            $map['t.uid'] = ['=',$param['uid']];
+        }
+        if($param['name']){
+            $map['t.name'] = ['like','%' . $param['name'] . '%'];
+        }
+        $result['list'] = $this->commonModel
+            ->alias('t')
+            ->join('__USER__ t1','t.uid=t1.id','left')
+            ->where($map)
+            ->field($field)
+            ->order('start_time desc')
+            ->paginate(10,false,$param);
+        $result['page'] = $result['list']->render();
+        return $result;
+    }
 }

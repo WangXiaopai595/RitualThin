@@ -1,0 +1,63 @@
+{include file="public/header" /}
+<section class="layui-larry-box">
+	<div class="larry-personal">
+		<div class="layui-tab">
+			<blockquote class="layui-elem-quote news_search">
+				<div class="layui-inline">
+					<form method="get">
+						<div class="layui-input-inline">
+							<input value="{$param['id']}" placeholder="请输入礼薄id" name="id" class="layui-input search_input" type="text">
+						</div>
+						<div class="layui-input-inline">
+							<input value="{$param['name']}" placeholder="请输入礼薄名称" name="name" class="layui-input search_input" type="text">
+						</div>
+						<div class="layui-input-inline">
+							<input value="{$param['uid']}" placeholder="请输入用户id" name="uid" class="layui-input search_input" type="text">
+						</div>
+						<button type="submit" class="layui-btn search_btn">查询</button>
+					</form>
+				</div>
+					
+			</blockquote>
+
+			<!-- 操作日志 -->
+			<div class="layui-form news_list">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>所属人</th>
+							<th>名称</th>
+							<th>日期</th>
+							<th>总金额</th>
+							<th>总送礼人数</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody class="news_content">
+						{volist name="RitualThin['list']" id="vo"}
+							<tr>
+								<td>{$vo.id}</td>
+								<td>{$vo.nick_name}(ID:{$vo.uid})</td>
+								<td>{$vo.name}</td>
+								<td>{$vo.start_time|date='Y-m-d H:i',###}</td>
+								<td>{$vo.money_total}</td>
+								<td>{$vo.user_total}</td>
+								<td>
+									{if condition="in_array('ritualthin/detail',$operable)"}
+										<a href="{:url('ritualthin/detail',array('rt_id'=>$vo['id']))}" class="layui-btn layui-btn-mini "><i class="fa fa-eye"></i> 详情</a>
+									{/if}
+								</td>
+							</tr>
+						{/volist}
+					</tbody>
+				</table>
+				<div style="text-align: right;">
+					{$RitualThin.page}
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+{include file="public/footer" /}
