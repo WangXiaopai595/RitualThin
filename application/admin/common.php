@@ -84,7 +84,7 @@ function falseAjax($msg = '',$data = '')
 }
 
 /**
- * 文件上传
+ * 文件上传--递归上传、支持多图、单图上传
  * created by:Mp_Lxj
  * @date:2018/11/2 23:05
  * @param $file

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\www\RitualThin\public/../application/admin\view\banner\index.html";i:1541170812;s:59:"D:\www\RitualThin\application\admin\view\public\header.html";i:1517123229;s:59:"D:\www\RitualThin\application\admin\view\public\footer.html";i:1541171683;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\www\RitualThin\public/../application/admin\view\banner\index.html";i:1541228983;s:59:"D:\www\RitualThin\application\admin\view\public\header.html";i:1517123229;s:59:"D:\www\RitualThin\application\admin\view\public\footer.html";i:1541171683;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,45 +249,6 @@
 					});
 			  	}
 			});
-		})
-		
-		/**
-		 * 修改用户禁用状态
-		 */
-		$(".status div").click(function(){
-			var index = layer.load(0, {time: 10000});
-			var status = $(this).prev().val();
-			var url = $(this).attr("data-url");
-			var id = $(this).attr("data-id");
-			if(status == 1){
-				status = 0;
-			}else{
-				status = 1;
-			}
-			if(!url){
-				layer.msg('无权限操作此项',{icon:1,time:1000});
-			}else{
-				$.ajax({
-					type:"post",
-					dataType:"json",
-					url:url,
-					data:{
-						id:id,
-						status:status
-					},
-					success:function(date){
-						layer.close(index);
-						if(date.status == 1){
-							layer.msg(date.msg,{icon:1,time:1000});
-							setTimeout(function(){
-								location.reload();
-							},400)
-						}else{
-							layer.msg(date.msg,{icon:2,time:1000});
-						}
-					}
-				})
-			}
 		})
 	})
 </script>
