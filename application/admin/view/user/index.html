@@ -64,7 +64,17 @@
 										{/if}
 									{/if}
 								</td>
-								<td></td>
+								<td>
+									{if condition="in_array('ritualthin/index',$operable)"}
+										<a href="{:url('ritualthin/index',array('uid'=>$vo['id']))}" class="layui-btn layui-btn-mini "><i class="fa fa-eye"></i> 礼薄</a>
+									{/if}
+									{if condition="in_array('giftgive/index',$operable)"}
+										<a href="{:url('giftgive/index',array('uid'=>$vo['id']))}" class="layui-btn layui-btn-mini "><i class="fa fa-eye"></i> 送礼</a>
+									{/if}
+									{if condition="in_array('remind/index',$operable)"}
+										<a href="{:url('remind/index',array('uid'=>$vo['id']))}" class="layui-btn layui-btn-mini "><i class="fa fa-eye"></i> 提醒</a>
+									{/if}
+								</td>
 							</tr>
 						{/volist}
 					</tbody>

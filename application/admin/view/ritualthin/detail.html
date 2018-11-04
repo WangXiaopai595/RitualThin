@@ -1,0 +1,88 @@
+{include file="public/header" /}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+	<legend>
+		<div class="layui-inline" style="width: 100%">
+			礼薄详情
+			<a href="{:url('ritualthin/index')}" class="layui-btn layui-btn-normal" style="float: right;margin-right: 30px">返回礼薄列表</a>
+		</div>
+	</legend>
+</fieldset>
+<section class="layui-larry-box">
+	<div class="larry-personal">
+		<div class="layui-tab">
+			<!-- 操作日志 -->
+			<div class="layui-form news_list">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>所属人</th>
+							<th>名称</th>
+							<th>日期</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{$RitualThin.id}</td>
+							<td>{$RitualThin.nick_name}(ID:{$RitualThin.uid})</td>
+							<td>{$RitualThin.name}</td>
+							<td>{$RitualThin.start_time|date='Y-m-d H:i',###}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+				<legend>
+					<div class="layui-inline">
+						送礼详情
+					</div>
+				</legend>
+			</fieldset>
+
+			<blockquote class="layui-elem-quote news_search">
+				<div class="layui-inline">
+					<form action="{:url('ritualthin/detail',['rt_id' => $param['rt_id']])}" method="get">
+						<div class="layui-input-inline">
+							<input value="{$param['name']}" placeholder="请输入姓名" name="name" class="layui-input search_input" type="text">
+						</div>
+						<button type="submit" class="layui-btn search_btn">查询</button>
+					</form>
+				</div>
+
+			</blockquote>
+			<!-- 操作日志 -->
+			<div class="layui-form news_list">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>姓名</th>
+							<th>金额</th>
+							<th>关系</th>
+							<th>事件</th>
+							<th>日期</th>
+						</tr>
+					</thead>
+					<tbody>
+						{volist name="GiftReceive['list']" id="vo"}
+							<tr>
+								<td>{$vo.id}</td>
+								<td>{$vo.name}</td>
+								<td>{$vo.money}</td>
+								<td>{$vo.relation}</td>
+								<td>{$vo.event}</td>
+								<td>{$vo.give_time|date='Y-m-d H:i',###}</td>
+							</tr>
+						{/volist}
+					</tbody>
+				</table>
+				<div style="text-align: right;">
+					{$GiftReceive.page}
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+{include file="public/footer" /}

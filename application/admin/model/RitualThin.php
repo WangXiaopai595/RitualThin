@@ -65,4 +65,26 @@ class RitualThin extends Model
         $result['page'] = $result['list']->render();
         return $result;
     }
+
+    /**
+     * 获取礼薄单条详细信息
+     * created by:Mp_Lxj
+     * @date:2018/11/4 13:30
+     * @param $data
+     * @return array|false|mixed|\PDOStatement|string|Model
+     */
+    public function  getRitualThinData($data)
+    {
+        $field = [
+            't.id','t.name','t.start_time','t.uid','t1.nick_name'
+        ];
+        $map['t.id'] = $data['rt_id'];
+        return $this
+            ->commonModel
+            ->alias('t')
+            ->join('__USER__ t1','t.uid=t1.id','left')
+            ->where($map)
+            ->field($field)
+            ->find();
+    }
 }

@@ -46,4 +46,31 @@ class GiftReceive extends Model
         return $this->commonModel->where($map)->sum('money');
     }
 
+    /**
+     * 获取送礼列表
+     * created by:Mp_Lxj
+     * @date:2018/11/4 13:40
+     * @param $param
+     * @return mixed
+     */
+    public function getGiftReceiveList($param){
+        $field = [
+            'id','name','give_time','money','relation','event'
+        ];
+        $map = [];
+        if($param['id']){
+            $map['rt_id'] = ['=',$param['rt_id']];
+        }
+        if($param['name']){
+            $map['name'] = ['like','%' . $param['name'] . '%'];
+        }
+        $result['list'] = $this->commonModel
+            ->where($map)
+            ->field($field)
+            ->order('give_time desc')
+            ->paginate(10,false,$param);
+        $result['page'] = $result['list']->render();
+        return $result;
+    }
+
 }
