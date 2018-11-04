@@ -1,11 +1,11 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\www\RitualThin\public/../application/admin\view\index\index.html";i:1541262604;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\www\RitualThin\public/../application/admin\view\index\index.html";i:1541313190;}*/ ?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>KIT ADMIN</title>
+    <title>礼薄小程序后台管理系统</title>
     <link rel="stylesheet" href="/static/admin/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="/static/admin/css/boot.css">
     <link rel="stylesheet" href="/static/admin/build/css/app.css" media="all">

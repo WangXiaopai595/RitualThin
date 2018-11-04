@@ -58,4 +58,16 @@ class User extends Model
             return falseAjax('修改失败，请刷新后再试');
         }
     }
+
+    /**
+     * 获取用户总数
+     * created by:Mp_Lxj
+     * @date:2018/11/4 14:51
+     * @param $map
+     * @return int|string
+     */
+    public function getUserCount($map)
+    {
+        return $this->commonModel->where($map)->count();
+    }
 }

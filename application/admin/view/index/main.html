@@ -1,69 +1,132 @@
 {include file="public/header" /}
 		<div class="panel_box row">
 			<div class="panel col">
-				<a href="javascript:;" data-url="page/message/message.html">
-					<div class="panel_icon">
-						<i class="layui-icon" data-icon="&#xe63a;">&#xe63a;</i>
-					</div>
-					<div class="panel_word newMessage">
-						<span></span>
-						<cite>新消息</cite>
-					</div>
-				</a>
-			</div>
-			<div class="panel col">
-				<a href="javascript:;" data-url="page/user/allUsers.html">
-					<div class="panel_icon" style="background-color:#FF5722;">
-						<i class="iconfont icon-dongtaifensishu" data-icon="icon-dongtaifensishu"></i>
-					</div>
-					<div class="panel_word userAll">
-						<span></span>
-						<cite>新增人数</cite>
-					</div>
-				</a>
-			</div>
-			<div class="panel col">
-				<a href="javascript:;" data-url="page/user/allUsers.html">
+				<a href="javascript:;">
 					<div class="panel_icon" style="background-color:#009688;">
 						<i class="layui-icon" data-icon="&#xe613;">&#xe613;</i>
 					</div>
 					<div class="panel_word userAll">
-						<span></span>
+						<span>{$total.user}</span>
 						<cite>用户总数</cite>
 					</div>
 				</a>
 			</div>
 			<div class="panel col">
-				<a href="javascript:;" data-url="page/img/images.html">
-					<div class="panel_icon" style="background-color:#5FB878;">
-						<i class="layui-icon" data-icon="&#xe64a;">&#xe64a;</i>
-					</div>
-					<div class="panel_word imgAll">
-						<span></span>
-						<cite>图片总数</cite>
-					</div>
-				</a>
-			</div>
-			<div class="panel col">
-				<a href="javascript:;" data-url="page/news/newsList.html">
+				<a href="javascript:;">
 					<div class="panel_icon" style="background-color:#F7B824;">
 						<i class="iconfont icon-wenben" data-icon="icon-wenben"></i>
 					</div>
 					<div class="panel_word waitNews">
-						<span></span>
-						<cite>待审核文章</cite>
+						<span>{$total.rt}</span>
+						<cite>礼薄总数</cite>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="panel_box row">
+			<div class="panel col">
+				<a href="javascript:;">
+					<div class="panel_icon" style="background-color:#FF5722;">
+						<i class="iconfont icon-dongtaifensishu" data-icon="icon-dongtaifensishu"></i>
+					</div>
+					<div class="panel_word userAll">
+						<span>{$total.user_today}</span>
+						<cite>今日新增用户</cite>
 					</div>
 				</a>
 			</div>
 			<div class="panel col max_panel">
-				<a href="javascript:;" data-url="page/news/newsList.html">
+				<a href="javascript:;">
 					<div class="panel_icon" style="background-color:#2F4056;">
 						<i class="iconfont icon-text" data-icon="icon-text"></i>
 					</div>
 					<div class="panel_word allNews">
-						<span></span>
-						<em>文章总数</em>
-						<cite>文章列表</cite>
+						<span>{$total.rt_today}</span>
+						<em>今日新增礼薄</em>
+					</div>
+				</a>
+			</div>
+			<div class="panel col">
+				<a href="javascript:;">
+					<div class="panel_icon" style="background-color:#FF5722;">
+						<i class="iconfont icon-dongtaifensishu" data-icon="icon-dongtaifensishu"></i>
+					</div>
+					<div class="panel_word userAll">
+						<span>{$total.user_7}</span>
+						<cite>7日新增用户</cite>
+					</div>
+				</a>
+			</div>
+			<div class="panel col max_panel">
+				<a href="javascript:;">
+					<div class="panel_icon" style="background-color:#2F4056;">
+						<i class="iconfont icon-text" data-icon="icon-text"></i>
+					</div>
+					<div class="panel_word allNews">
+						<span>{$total.rt_7}</span>
+						<em>7日新增礼薄</em>
+					</div>
+				</a>
+			</div>
+			<div class="panel col">
+				<a href="javascript:;">
+					<div class="panel_icon" style="background-color:#FF5722;">
+						<i class="iconfont icon-dongtaifensishu" data-icon="icon-dongtaifensishu"></i>
+					</div>
+					<div class="panel_word userAll">
+						<span>{$total.user_30}</span>
+						<cite>30日新增用户</cite>
+					</div>
+				</a>
+			</div>
+			<div class="panel col max_panel">
+				<a href="javascript:;">
+					<div class="panel_icon" style="background-color:#2F4056;">
+						<i class="iconfont icon-text" data-icon="icon-text"></i>
+					</div>
+					<div class="panel_word allNews">
+						<span>{$total.rt_30}</span>
+						<em>30日新增礼薄</em>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<blockquote class="layui-elem-quote news_search">
+			<div class="layui-inline">
+				<form id="formData">
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input" name="date_start" id="date_start">
+					</div>—
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input" name="date_end" id="date_end">
+					</div>
+					<button type="button" class="layui-btn search_btn" id="button" data-url="{:url('index/search')}">查询</button>
+				</form>
+			</div>
+		</blockquote>
+
+		<div class="panel_box row">
+			<div class="panel col">
+				<a href="javascript:;">
+					<div class="panel_icon" style="background-color:#009688;">
+						<i class="layui-icon" data-icon="&#xe613;">&#xe613;</i>
+					</div>
+					<div class="panel_word userAll">
+						<span id="user"></span>
+						<cite>用户总数</cite>
+					</div>
+				</a>
+			</div>
+			<div class="panel col">
+				<a href="javascript:;">
+					<div class="panel_icon" style="background-color:#F7B824;">
+						<i class="iconfont icon-wenben" data-icon="icon-wenben"></i>
+					</div>
+					<div class="panel_word waitNews">
+						<span id="rt"></span>
+						<cite>礼薄总数</cite>
 					</div>
 				</a>
 			</div>
@@ -94,30 +157,65 @@
 					<!--<p>* Tab选项卡的tabAdd增加id参数，用于在删除和切换时，以id作为匹配媒介</p>-->
 				<!--</div>-->
 			<!--</div>-->
-			<!--<div class="sysNotice col" style="width: 100%">-->
-				<!--<blockquote class="layui-elem-quote title">系统基本参数</blockquote>-->
-				<!--<table class="layui-table">-->
-					<!--<colgroup>-->
-						<!--<col width="150">-->
-						<!--<col>-->
-					<!--</colgroup>-->
-					<!--<tbody>-->
-						<!--{volist name="info" id="vo"}-->
-							<!--<tr>-->
-								<!--<td>{$key}</td>-->
-								<!--<td class="version">{$vo}</td>-->
-							<!--</tr>-->
-						<!--{/volist}-->
-					<!--</tbody>-->
-				<!--</table>-->
-				<!--&lt;!&ndash;<blockquote class="layui-elem-quote title">最新文章<i class="iconfont icon-new1"></i></blockquote>-->
-				<!--<table class="layui-table" lay-skin="line">-->
-					<!--<colgroup>-->
-						<!--<col>-->
-						<!--<col width="110">-->
-					<!--</colgroup>-->
-					<!--<tbody class="hot_news"></tbody>-->
-				<!--</table>&ndash;&gt;-->
-			<!--</div>-->
+			<div class="sysNotice col" style="width: 100%">
+				<blockquote class="layui-elem-quote title">系统基本参数</blockquote>
+				<table class="layui-table">
+					<colgroup>
+						<col width="150">
+						<col>
+					</colgroup>
+					<tbody>
+						{volist name="info" id="vo"}
+							<tr>
+								<td>{$key}</td>
+								<td class="version">{$vo}</td>
+							</tr>
+						{/volist}
+					</tbody>
+				</table>
+				<!--<blockquote class="layui-elem-quote title">最新文章<i class="iconfont icon-new1"></i></blockquote>
+				<table class="layui-table" lay-skin="line">
+					<colgroup>
+						<col>
+						<col width="110">
+					</colgroup>
+					<tbody class="hot_news"></tbody>
+				</table>-->
+			</div>
 		</div>
-{include file="public/footer" /} 
+{include file="public/footer" /}
+
+
+<script>
+	layui.use('laydate', function(){
+		var laydate = layui.laydate;
+
+		//执行一个laydate实例
+		laydate.render({
+			elem: '#date_start' //指定元素
+		});
+		laydate.render({
+			elem: '#date_end' //指定元素
+		});
+	});
+
+	$("#button").click(function(){
+		var url = $(this).attr("data-url");
+		var data = $("#formData").serialize();
+
+		$.ajax({
+			type:"post",
+			dataType:"json",
+			url:url,
+			data:data,
+			success:function(date){
+				if(date.status == 1){
+					$("#user").html(date.data.user);
+					$("#rt").html(date.data.rt);
+				}else{
+					layer.msg(date.msg,{icon:2,time:1000});
+				}
+			}
+		})
+	})
+</script>

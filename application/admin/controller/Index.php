@@ -1,6 +1,9 @@
 <?php
 namespace app\admin\controller;
 use think\Controller;
+use think\Loader;
+use think\Request;
+
 class Index extends Controller
 {
 	public function __construct()
@@ -97,7 +100,40 @@ class Index extends Controller
 			'用户的IP地址'=>$_SERVER['REMOTE_ADDR'],
 		);
 		$this->assign('info',$info);
+
+		$total = $this->total();
+		$this->assign('total',$total);
 		return $this->fetch();
+	}
+
+	/**
+	 * 面板展示数据
+	 * created by:Mp_Lxj
+	 * @date:2018/11/4 15:00
+	 * @return array
+	 */
+	public function total()
+	{
+		$total = [];
+		//总数统计
+		$total['user'] = Loader::model('User')->getUserCount([]);
+		$total['rt'] = Loader::model('RitualThin')->getRitualThinCount([]);
+
+		//今日统计
+		$map['time'] = ['between',[strtotime(date('Y-m-d')),time()]];
+		$total['user_today'] = Loader::model('User')->getUserCount($map);
+		$total['rt_today'] = Loader::model('RitualThin')->getRitualThinCount($map);
+
+		//7天统计
+		$map['time'] = ['between',[strtotime('-7 days'),time()]];
+		$total['user_7'] = Loader::model('User')->getUserCount($map);
+		$total['rt_7'] = Loader::model('RitualThin')->getRitualThinCount($map);
+
+		//30天统计
+		$map['time'] = ['between',[strtotime('-30 days'),time()]];
+		$total['user_30'] = Loader::model('User')->getUserCount($map);
+		$total['rt_30'] = Loader::model('RitualThin')->getRitualThinCount($map);
+		return $total;
 	}
 
 	/**
@@ -111,5 +147,22 @@ class Index extends Controller
 
 	public function form(){
 		return $this->fetch();
+	}
+
+	/**
+	 * 自定义查询
+	 * created by:Mp_Lxj
+	 * @date:2018/11/4 15:20
+	 * @return array
+	 */
+	public function search()
+	{
+		$param = Request::instance()->param();
+		$total = [];
+		//总数统计
+		$map['time'] = ['between',[strtotime($param['date_start']),strtotime($param['date_end'])]];
+		$total['user'] = Loader::model('User')->getUserCount($map);
+		$total['rt'] = Loader::model('RitualThin')->getRitualThinCount($map);
+		return trueAjax('',$total);
 	}
 }
