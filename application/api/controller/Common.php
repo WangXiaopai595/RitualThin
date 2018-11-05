@@ -23,10 +23,10 @@ class Common extends Controller
 			];
 			$userData = Loader::model('User')->getUserData($map,$field);
 			if(!$userData['status']){
-				return falseAjax('帐号已被禁用，请联系程序管理员!');
+				exit(json_encode(falseAjax('帐号已被禁用，请联系程序管理员!')));
 			}
 		}else{
-			return falseAjax('请先登录!');
+			exit(json_encode(falseAjax('请先登录!')));
 		}
 	}
 }

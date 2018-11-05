@@ -33,4 +33,29 @@ class RitualThin extends Model
 	{
 		return $this->commonModel->where($map)->field($field)->order('start_time desc')->select();
 	}
+
+	/**
+	 * 修改礼薄信息
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 20:59
+	 * @param $map
+	 * @param $data
+	 * @return int|string
+	 */
+	public function rtUpdate($map,$data)
+	{
+		return $this->commonModel->where($map)->update($data);
+	}
+
+	/**
+	 * 删除礼薄信息
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 21:03
+	 * @param $map
+	 * @return int
+	 */
+	public function rtRemove($map)
+	{
+		return $this->commonModel->where($map)->delete();
+	}
 }

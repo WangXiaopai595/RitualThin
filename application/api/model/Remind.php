@@ -32,4 +32,29 @@ class Remind extends Model
 	{
 		return $this->commonModel->where($map)->field($field)->order('start_time desc')->select();
 	}
+
+	/**
+	 * 删除提醒
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 20:52
+	 * @param $map
+	 * @return int
+	 */
+	public function remindDel($map)
+	{
+		return $this->commonModel->where($map)->delete();
+	}
+
+	/**
+	 * 更新提醒信息
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 21:44
+	 * @param $map
+	 * @param $data
+	 * @return int|string
+	 */
+	public function remindUpdate($map,$data)
+	{
+		return $this->commonModel->where($map)->update($data);
+	}
 }

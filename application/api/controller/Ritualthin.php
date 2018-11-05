@@ -126,4 +126,72 @@ class Ritualthin extends Common
 		$result = asciiGroup($this->dateFormat($gift_receive,'give_time'));
 		return trueAjax('',$result);
 	}
+
+	/**
+	 * 搜索
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 20:15
+	 * @return array
+	 */
+	public function search()
+	{
+		$Giftgive = new Giftgive();
+		$Giftreceive = new Giftreceive();
+		$param = Request::instance()->param();
+		$data['gift_give'] = $Giftreceive->getGiftReceive($param);
+		$data['gift_receive'] = $Giftgive->getGiftgiveList($param);
+
+		foreach($data as &$value){
+			$value = $this->dateFormat($value,'give_time');
+		}
+		return trueAjax('',$data);
+	}
+
+	/**
+	 * 更新礼薄信息
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 21:00
+	 * @return array
+	 */
+	public function rtUpdate()
+	{
+		$param = Request::instance()->param();
+		$map['id'] = $param['id'];
+		$map['uid'] = $param['uid'];
+		Db::startTrans();
+		try{
+			$param['start_time'] = strtotime($param['start_time']);
+			Loader::model('RitualThin')->rtUpdate($map,$param);
+			Db::commit();
+			return trueAjax('更新成功');
+		}catch(\Exception $e){
+			Db::rollback();
+			return falseAjax($e->getMessage());
+		}
+	}
+
+	/**
+	 * 删除礼薄所有信息
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 21:05
+	 * @return array
+	 */
+	public function rtRemove()
+	{
+		$param = Request::instance()->param();
+		$map['id'] = $param['id'];
+		$map['uid'] = $param['uid'];
+		Db::startTrans();
+		try{
+			Loader::model('RitualThin')->rtRemove($map,$param);//删除礼薄信息
+			$receiveMap['rt_id'] = $param['id'];
+			$receiveMap['uid'] = $param['uid'];
+			Loader::model('GiftReceive')->GiftReceiveDel($receiveMap);//删除礼薄下收礼记录
+			Db::commit();
+			return trueAjax('删除成功');
+		}catch(\Exception $e){
+			Db::rollback();
+			return falseAjax($e->getMessage());
+		}
+	}
 }

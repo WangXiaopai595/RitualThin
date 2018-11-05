@@ -2,7 +2,9 @@
 namespace app\api\controller;
 
 
+use think\Db;
 use think\Loader;
+use think\Request;
 
 class Giftreceive extends Common
 {
@@ -44,5 +46,50 @@ class Giftreceive extends Common
 		];
 		$result = Loader::model('GiftReceive')->getGiftReceiveList($map,$field);
 		return $result;
+	}
+
+	/**
+	 * 更新收礼内容信息
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 20:24
+	 * @return array
+	 */
+	public function giftReceiveUpdate()
+	{
+		$param = Request::instance()->param();
+		$map['id'] = $param['id'];
+		$map['uid'] = $param['uid'];
+		Db::startTrans();
+		try{
+			$param['index'] = GetFirst($param['name']);
+			Loader::model('GiftReceive')->GiftReceiveUpdate($map,$param);
+			Db::commit();
+			return trueAjax('更新成功');
+		}catch(\Exception $e){
+			Db::rollback();
+			return falseAjax($e->getMessage());
+		}
+	}
+
+	/**
+	 * 删除收礼信息
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 20:29
+	 * @return array
+	 */
+	public function giftReceiveRemove()
+	{
+		$param = Request::instance()->param();
+		$map['id'] = $param['id'];
+		$map['uid'] = $param['uid'];
+		Db::startTrans();
+		try{
+			Loader::model('GiftReceive')->GiftReceiveDel($map);
+			Db::commit();
+			return trueAjax('删除成功');
+		}catch(\Exception $e){
+			Db::rollback();
+			return falseAjax($e->getMessage());
+		}
 	}
 }

@@ -69,14 +69,14 @@ class WxLogin
 		$userData = Loader::model('User')->getUserData($map,$field);
 		//要更新或写入的数据
 		$createData = [
-			'openid' => $data['openid'] ?? '',
-			'unionId' => $data['unionId'] ?? '',
-			'nick_mame' => $data['nickName'] ?? '',
-			'gender' => $data['gender'] ?? 1,
-			'city' => $data['city'] ?? '',
-			'province' => $data['province'] ?? '',
-			'country' => $data['country'] ?? '',
-			'avatarUrl' => $data['avatarUrl'] ?? '',
+			'openid' => $data['openid'],
+			'unionId' => $data['unionId'],
+			'nick_mame' => $data['nickName'],
+			'gender' => $data['gender'],
+			'city' => $data['city'],
+			'province' => $data['province'],
+			'country' => $data['country'],
+			'avatarUrl' => $data['avatarUrl'],
 			'last_login_time' => time()
 		];
 

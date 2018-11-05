@@ -44,4 +44,29 @@ class GiftGive extends Model
 	{
 		return $this->commonModel->where($map)->field($field)->order('index')->select();
 	}
+
+	/**
+	 * 更新送礼信息
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 20:32
+	 * @param $map
+	 * @param $data
+	 * @return int|string
+	 */
+	public function GiftGiveUpdate($map,$data)
+	{
+		return $this->commonModel->where($map)->update($data);
+	}
+
+	/**
+	 * 删除送礼数据
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 20:40
+	 * @param $map
+	 * @return int
+	 */
+	public function GiftGiveDel($map)
+	{
+		return $this->commonModel->where($map)->delete();
+	}
 }

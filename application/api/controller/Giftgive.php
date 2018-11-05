@@ -2,6 +2,7 @@
 namespace app\api\controller;
 
 
+use think\Db;
 use think\Loader;
 use think\Request;
 
@@ -76,5 +77,51 @@ class Giftgive extends Common
 		];
 		$result = Loader::model('GiftGive')->getGiftGiveList($map,$field);
 		return $result;
+	}
+
+	/**
+	 * 更新送礼信息
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 20:33
+	 * @return array
+	 */
+	public function giftGiveUpdate()
+	{
+		$param = Request::instance()->param();
+		$map['id'] = $param['id'];
+		$map['uid'] = $param['uid'];
+		Db::startTrans();
+		try{
+			$param['give_time'] = strtotime($param['give_time']);
+			$param['index'] = GetFirst($param['name']);
+			Loader::model('GiftGive')->GiftGiveUpdate($map,$param);
+			Db::commit();
+			return trueAjax('更新成功');
+		}catch(\Exception $e){
+			Db::rollback();
+			return falseAjax($e->getMessage());
+		}
+	}
+
+	/**
+	 * 删除送礼记录
+	 * created by:Mp_Lxj
+	 * @date:2018/11/5 20:40
+	 * @return array
+	 */
+	public function giftGiveRemove()
+	{
+		$param = Request::instance()->param();
+		$map['id'] = $param['id'];
+		$map['uid'] = $param['uid'];
+		Db::startTrans();
+		try{
+			Loader::model('GiftGive')->GiftGiveDel($map,$param);
+			Db::commit();
+			return trueAjax('删除成功');
+		}catch(\Exception $e){
+			Db::rollback();
+			return falseAjax($e->getMessage());
+		}
 	}
 }
