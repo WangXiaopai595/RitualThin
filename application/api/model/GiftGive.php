@@ -31,4 +31,17 @@ class GiftGive extends Model
 	{
 		return $this->commonModel->where($map)->sum('money');
 	}
+
+	/**
+	 * 获取送礼列表
+	 * Created by：Mp_Lxj
+	 * @date 2018/11/5 17:05
+	 * @param $map
+	 * @param $field
+	 * @return false|\PDOStatement|string|\think\Collection
+	 */
+	public function getGiftGiveList($map,$field)
+	{
+		return $this->commonModel->where($map)->field($field)->order('index')->select();
+	}
 }

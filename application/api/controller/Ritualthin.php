@@ -79,12 +79,16 @@ class Ritualthin extends Common
 	 * Created by：Mp_Lxj
 	 * @date 2018/11/5 14:38
 	 * @param $data
+	 * @param $field
 	 * @return mixed
 	 */
-	public function dateFormat($data)
+	public function dateFormat($data,$field = 'start_time')
 	{
 		foreach($data as &$value){
-			$value['start_time'] = date('Y-m-d H:i',$value['start_time']);
+			$value[$field] = date('Y-m-d',$value[$field]);
+			if(isset($value['money'])){
+				$value['money'] = intval($value['money']);
+			}
 		}
 		return $data;
 	}
@@ -106,5 +110,20 @@ class Ritualthin extends Common
 		];
 		$result = Loader::model('RitualThin')->getRitualThinList($map,$field,$limit);
 		return trueAjax('',$this->dateFormat($result));
+	}
+
+	/**
+	 * 礼薄详情---收礼记录
+	 * Created by：Mp_Lxj
+	 * @date 2018/11/5 16:46
+	 * @return array|\Illuminate\Http\JsonResponse|void
+	 */
+	public function getGiftReceiveDetail()
+	{
+		$Giftreceive = new Giftreceive();
+		$param = Request::instance()->param();
+		$gift_receive = $Giftreceive->getGiftReceive($param);
+		$result = asciiGroup($this->dateFormat($gift_receive,'give_time'));
+		return trueAjax('',$result);
 	}
 }

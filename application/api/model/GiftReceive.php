@@ -43,4 +43,17 @@ class GiftReceive extends Model
 	{
 		return $this->commonModel->where($map)->count();
 	}
+
+	/**
+	 * 获取收礼列表
+	 * Created by：Mp_Lxj
+	 * @date 2018/11/5 16:21
+	 * @param $map
+	 * @param $field
+	 * @return false|\PDOStatement|string|\think\Collection
+	 */
+	public function getGiftReceiveList($map,$field)
+	{
+		return $this->commonModel->where($map)->field($field)->order('index')->select();
+	}
 }
