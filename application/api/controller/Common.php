@@ -25,6 +25,8 @@ class Common extends Controller
 			if(!$userData['status']){
 				return falseAjax('帐号已被禁用，请联系程序管理员!');
 			}
+		}else{
+			return falseAjax('请先登录!');
 		}
 	}
 }
