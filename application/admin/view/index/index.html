@@ -57,7 +57,7 @@
 	                        <dl class="layui-nav-child">
 	                        	{volist name="vo['menu']" id="item" key='key'}
 	                        		<dd>
-		                                <a href="javascript:;" data-url="{:url($item['url'])}" data-icon="{$item.cicon}" data-title="{$item.title}" kit-target data-id='{$k}{$key}'>
+		                                <a href="{:url($item['url'])}" target="myFrameName"  data-icon="{$item.cicon}" data-title="{$item.title}" kit-target data-id='{$k}{$key}'>
 		                                	<i class="{$item.icon}" aria-hidden="true"></i>
 		                                	<span> {$item.title}</span>
 		                                </a>
@@ -76,8 +76,15 @@
             </div>
         </div>
         <div class="layui-body" id="container">
+            <div class="layui-tab layui-tab-card kit-tab">
+                <div class="layui-tab-content" style="margin-top: 10px">
+                    <div class="layui-tab-item layui-show">
+                        <iframe src="/admin/index/main.html" style="height: 808px;" id="myFrame" name="myFrameName"> </iframe>
+                    </div>
+                </div>
+            </div>
             <!-- 内容主体区域 -->
-            <div style="padding: 15px;">主体内容加载中,请稍等...</div>
+            <!--<div style="padding: 15px;">主体内容加载中,请稍等...</div>-->
         </div>
 
         <div class="layui-footer">
@@ -101,9 +108,9 @@
             //将message设置为全局以便子页面调用
             message = layui.message;
             //主入口
-            app.set({
-                type: 'iframe'
-            }).init();
+//            app.set({
+//                type: 'iframe'
+//            }).init();
             $('#pay').on('click', function() {
                 layer.open({
                     title: false,
@@ -114,6 +121,10 @@
                 });
             });
         });
+
+        var height = document.documentElement.clientHeight;
+        var css_height = height - 50 - 35 - 20;
+        $('#myFrame').css('height',css_height);
     </script>
 </body>
 
