@@ -102,20 +102,20 @@ layui.define(["jquery", "element", "nprogress"], function(i) {
 				s = i.id;
 			if(t.tabExists(s)) t.tabChange(s);
 			else {
-				NProgress.start();
-				var r = ['<li class="layui-this" lay-id="' + s + '" >']; - 1 !== n.indexOf("fa-") ? r.push('<i class="fa ' + n + '" aria-hidden="true"></i>') : r.push('<i class="layui-icon">' + n + "</i>"), r.push("&nbsp;" + l), r.push('<i class="layui-icon layui-unselect layui-tab-close">&#x1006;</i>'), r.push("</li>");
-				var o = '<div class="layui-tab-item layui-show" lay-item-id="' + s + '"><iframe src="' + c + '"></iframe></div>';
-				t._title.append(r.join("")), t._content.append(o), t.getTab(s).find("i.layui-tab-close").off("click").on("click", function() {
-					a.closeBefore ? a.closeBefore(i) && t.tabDelete(s) : t.tabDelete(s)
-				}), t.tabChange(s), t.winResize(), t._content.find("div[lay-item-id=" + s + "]").find("iframe").on("load", function() {
-					NProgress.done()
-				}), a.onSwitch && e.on("tab(" + t._filter + ")", function(i) {
-					a.onSwitch({
-						index: i.index,
-						elem: i.elem,
-						layId: t._title.children("li").eq(i.index).attr("lay-id")
-					})
-				})
+				//NProgress.start();
+				//var r = ['<li class="layui-this" lay-id="' + s + '" >']; - 1 !== n.indexOf("fa-") ? r.push('<i class="fa ' + n + '" aria-hidden="true"></i>') : r.push('<i class="layui-icon">' + n + "</i>"), r.push("&nbsp;" + l), r.push('<i class="layui-icon layui-unselect layui-tab-close">&#x1006;</i>'), r.push("</li>");
+				//var o = '<div class="layui-tab-item layui-show" lay-item-id="' + s + '"><iframe src="' + c + '"></iframe></div>';
+				//t._title.append(r.join("")), t._content.append(o), t.getTab(s).find("i.layui-tab-close").off("click").on("click", function() {
+				//	a.closeBefore ? a.closeBefore(i) && t.tabDelete(s) : t.tabDelete(s)
+				//}), t.tabChange(s), t.winResize(), t._content.find("div[lay-item-id=" + s + "]").find("iframe").on("load", function() {
+				//	NProgress.done()
+				//}), a.onSwitch && e.on("tab(" + t._filter + ")", function(i) {
+				//	a.onSwitch({
+				//		index: i.index,
+				//		elem: i.elem,
+				//		layId: t._title.children("li").eq(i.index).attr("lay-id")
+				//	})
+				//})
 			}
 		}
 	};
