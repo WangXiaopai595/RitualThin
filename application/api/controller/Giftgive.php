@@ -53,7 +53,7 @@ class Giftgive extends Common
 		foreach($data as $value){
 			$money += $value['money'];
 		}
-		return $money;
+		return intval($money);
 	}
 
 	/**
