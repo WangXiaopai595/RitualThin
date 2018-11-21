@@ -23,7 +23,7 @@ class WxLogin
 		$result = $this->sendCurl($url,[],[],'GET',true);
 		$resData = json_decode($result,true);
 		if($resData['errcode'] == 0){
-			$res = $this->wxDecrypt($resData,$data['iv']);
+			$res = $this->wxDecrypt($resData,$data);
 			return $res;
 		}else{
 			return falseAjax('登录失败，错误码' . $resData['errcode']);
@@ -37,13 +37,17 @@ class WxLogin
 	 * @param $data
 	 * @return array|\Illuminate\Http\JsonResponse|void
 	 */
-	public function wxDecrypt($data,$iv)
+	public function wxDecrypt($data,$param)
 	{
 		vendor('wxLogin.wxBizDataCrypt');
 		$appid = Config::get('wxConfig.appid');
 		$session_key = $data['session_key'];
+		$sign = sha1($param['rawData'] . $session_key);
+		if ($sign != $param['signature']) {
+			return falseAjax('数据验签失败');
+		}
 		$Crypt = new \wxBizDataCrypt($appid,$session_key);
-		$errCode = $Crypt->decryptData($data,$iv,$data);
+		$errCode = $Crypt->decryptData($param['encryptedData'],$param['iv'],$data);
 
 		if($errCode == 0){
 			$resData = trueAjax('',json_decode($data,true));

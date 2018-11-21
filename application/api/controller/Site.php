@@ -35,8 +35,14 @@ class Site extends Common
 	public function getMessage()
 	{
 		$param = Request::instance()->param();
-		Cache::set('validate_code_' . $param['phone'],'123456',300);
-		return trueAjax('发送成功');
+		$res = Loader::controller('Message','server')->sendMsg($param['phone']);
+		if($res['status']){
+			Cache::set('validate_code_' . $param['phone'],$res['msg'],300);
+			return trueAjax('发送成功');
+		}else{
+			$msg = $res['msg'] ? ','.$res['msg'] : '';
+			return falseAjax('发送是失败' .$msg);
+		}
 	}
 
 	/**
