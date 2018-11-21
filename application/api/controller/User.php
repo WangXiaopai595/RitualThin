@@ -19,18 +19,5 @@ class User extends Controller
 		return $result;
 	}
 
-	/**
-	 * 获取默认手机号码，
-	 * created by:Mp_Lxj
-	 * @date:2018/11/5 21:56
-	 * @return array
-	 */
-	public function getDefaultPhone()
-	{
-		$param = Request::instance()->param();
-		$map['id'] = $param['uid'];
-		$field = ['phone'];
-		$result = Loader::model('User')->getUserData($map,$field);
-		return trueAjax('',$result);
-	}
+
 }

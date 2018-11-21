@@ -42,7 +42,7 @@ class Giftreceive extends Common
 			$map['name'] = ['like','%' . $data['name'] . '%'];
 		}
 		$field = [
-			'id','name','money','relation','give_time','index','event'
+			'id','name','money','relation','give_time','index'
 		];
 		$result = Loader::model('GiftReceive')->getGiftReceiveList($map,$field);
 		return $result;
@@ -87,6 +87,29 @@ class Giftreceive extends Common
 			Loader::model('GiftReceive')->GiftReceiveDel($map);
 			Db::commit();
 			return trueAjax('删除成功');
+		}catch(\Exception $e){
+			Db::rollback();
+			return falseAjax($e->getMessage());
+		}
+	}
+
+	/**
+	 * 新增收礼信息
+	 * Created by：Mp_Lxj
+	 * @date 2018/11/6 15:34
+	 * @return array|\Illuminate\Http\JsonResponse|void
+	 */
+	public function giftReceiveCreate()
+	{
+		$param = Request::instance()->param();
+		$param['time'] = time();
+		$param['give_time'] = strtotime($param['give_time']);
+		$param['index'] = GetFirst($param['name']);
+		Db::startTrans();
+		try{
+			Loader::model('GiftReceive')->giftReceiveCreate($param);//写入送礼信息
+			Db::commit();
+			return trueAjax('新增成功');
 		}catch(\Exception $e){
 			Db::rollback();
 			return falseAjax($e->getMessage());

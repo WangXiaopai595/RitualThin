@@ -124,4 +124,27 @@ class Giftgive extends Common
 			return falseAjax($e->getMessage());
 		}
 	}
+
+	/**
+	 * 新增收礼信息
+	 * Created by：Mp_Lxj
+	 * @date 2018/11/6 15:28
+	 * @return array|\Illuminate\Http\JsonResponse|void
+	 */
+	public function giftGiveCreate()
+	{
+		$param = Request::instance()->param();
+		$param['time'] = time();
+		$param['give_time'] = strtotime($param['give_time']);
+		$param['index'] = GetFirst($param['name']);
+		Db::startTrans();
+		try{
+			Loader::model('GiftGive')->GiftGiveCreate($param);//写入送礼信息
+			Db::commit();
+			return trueAjax('新增成功');
+		}catch(\Exception $e){
+			Db::rollback();
+			return falseAjax($e->getMessage());
+		}
+	}
 }

@@ -57,4 +57,16 @@ class Remind extends Model
 	{
 		return $this->commonModel->where($map)->update($data);
 	}
+
+	/**
+	 * 新增提醒
+	 * Created by：Mp_Lxj
+	 * @date 2018/11/6 15:55
+	 * @param $data
+	 * @return int|string
+	 */
+	public function remindCreate($data)
+	{
+		return $this->commonModel->insert($data);
+	}
 }

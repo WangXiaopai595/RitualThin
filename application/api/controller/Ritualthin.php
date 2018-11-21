@@ -194,4 +194,26 @@ class Ritualthin extends Common
 			return falseAjax($e->getMessage());
 		}
 	}
+
+	/**
+	 * 新增礼薄
+	 * Created by：Mp_Lxj
+	 * @date 2018/11/6 15:22
+	 * @return array|\Illuminate\Http\JsonResponse|void
+	 */
+	public function rtInsert()
+	{
+		$param = Request::instance()->param();
+		$param['time'] = time();
+		$param['start_time'] = strtotime($param['start_time']);
+		Db::startTrans();
+		try{
+			Loader::model('RitualThin')->rtCreate($param);//写入礼薄信息
+			Db::commit();
+			return trueAjax('新增成功');
+		}catch(\Exception $e){
+			Db::rollback();
+			return falseAjax($e->getMessage());
+		}
+	}
 }

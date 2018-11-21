@@ -55,7 +55,7 @@ class GiftReceive extends Model
      */
     public function getGiftReceiveList($param){
         $field = [
-            'id','name','give_time','money','relation','event'
+            'id','name','give_time','money','relation'
         ];
         $map = [];
         if($param['id']){

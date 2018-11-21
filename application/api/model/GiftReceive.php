@@ -81,4 +81,16 @@ class GiftReceive extends Model
 	{
 		return $this->commonModel->where($map)->delete();
 	}
+
+	/**
+	 * 新增收礼信息
+	 * Created by：Mp_Lxj
+	 * @date 2018/11/6 15:34
+	 * @param $data
+	 * @return int|string
+	 */
+	public function giftReceiveCreate($data)
+	{
+		return $this->commonModel->insert($data);
+	}
 }

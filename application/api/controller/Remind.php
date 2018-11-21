@@ -148,4 +148,31 @@ class Remind extends Common
 		$data['start_time'] = strtotime($data['start_time']);
 		return trueAjax('',$data);
 	}
+
+	/**
+	 * 新增提醒
+	 * Created by：Mp_Lxj
+	 * @date 2018/11/6 16:06
+	 * @return array|\Illuminate\Http\JsonResponse|void
+	 */
+	public function remindCreate()
+	{
+		$param = Request::instance()->param();
+		$data = $this->checkRemind($param);
+		if($data['status']){
+			$remind = $data['data'];
+			$remind['time'] = time();
+			Db::startTrans();
+			try{
+				Loader::model('Remind')->remindCreate($remind);
+				Db::commit();
+				return trueAjax('新增成功');
+			}catch(\Exception $e){
+				Db::rollback();
+				return falseAjax($e->getMessage());
+			}
+		}else{
+			return $data;
+		}
+	}
 }

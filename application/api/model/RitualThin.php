@@ -58,4 +58,16 @@ class RitualThin extends Model
 	{
 		return $this->commonModel->where($map)->delete();
 	}
+
+	/**
+	 * 写入礼薄信息
+	 * Created by：Mp_Lxj
+	 * @date 2018/11/6 15:22
+	 * @param $data
+	 * @return int|string
+	 */
+	public function rtCreate($data)
+	{
+		return $this->commonModel->insert($data);
+	}
 }
