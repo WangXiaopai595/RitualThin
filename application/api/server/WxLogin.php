@@ -42,16 +42,12 @@ class WxLogin
 		vendor('wxLogin.wxBizDataCrypt');
 		$appid = Config::get('wxConfig.appid');
 		$session_key = $data['session_key'];
-		$sign = sha1($param['rawData'] . $session_key);
-		if ($sign != $param['signature']) {
-			return falseAjax('数据验签失败');
-		}
 		$Crypt = new \wxBizDataCrypt($appid,$session_key);
-		$errCode = $Crypt->decryptData($param['encryptedData'],$param['iv'],$data);
+		$errCode = $Crypt->decryptData($param['encryptedData'],$param['iv'],$result);
 
 		if($errCode == 0){
-			$resData = trueAjax('',json_decode($data,true));
-			return $this->wxLogin($resData);
+			$resData = trueAjax('',json_decode($result,true));
+			return $this->wxLogin($resData['data']);
 		}else{
 			return falseAjax($errCode);
 		}
@@ -66,16 +62,16 @@ class WxLogin
 	 */
 	public function wxLogin($data)
 	{
-		$map['openid'] = $data['openid'];
+		$map['open_id'] = $data['openId'];
 		$field = [
 			'id as uid','nick_name','avatarUrl'
 		];
 		$userData = Loader::model('User')->getUserData($map,$field);
 		//要更新或写入的数据
 		$createData = [
-			'openid' => $data['openid'],
-			'unionId' => $data['unionId'],
-			'nick_mame' => $data['nickName'],
+			'open_id' => $data['openId'],
+			'unionId' => $data['unionId'] ?: '',
+			'nick_name' => $data['nickName'],
 			'gender' => $data['gender'],
 			'city' => $data['city'],
 			'province' => $data['province'],
