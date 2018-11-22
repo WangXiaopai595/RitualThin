@@ -20,7 +20,7 @@ class Message
 		$data = [
 			'content' => '您的验证码是：'.$rand,
 			'mobile' => $phone,
-			'sign' => '礼薄',
+			'sign' => '微礼薄',
 			'templateType' => 1,
 			'token' => $config['token'],
 			'uid' => $config['uid']
