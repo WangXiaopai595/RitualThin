@@ -68,7 +68,7 @@ class Remind extends Common
 		];
 		$result = Loader::model('Remind')->getRemindList($map,$field);
 		foreach($result as &$value){
-			$value['start_time'] = date('Y-m-d H:i',$value['start_time']);
+			$value['start_time'] = date('Y-m-d',$value['start_time']);
 		}
 		return $result;
 	}
