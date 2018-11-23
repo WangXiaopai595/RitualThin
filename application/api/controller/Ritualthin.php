@@ -71,7 +71,7 @@ class Ritualthin extends Common
 			'id','name','start_time'
 		];
 		$result = Loader::model('RitualThin')->getRitualThinList($map,$field);
-		return $this->dateFormat($result);
+		return $this->dateFormat($result,'start_time','.');
 	}
 
 	/**
@@ -82,10 +82,10 @@ class Ritualthin extends Common
 	 * @param $field
 	 * @return mixed
 	 */
-	public function dateFormat($data,$field = 'start_time')
+	public function dateFormat($data,$field = 'start_time',$connect = '-')
 	{
 		foreach($data as &$value){
-			$value[$field] = date('Y-m-d',$value[$field]);
+			$value[$field] = date('Y'. $connect .'m'. $connect .'d',$value[$field]);
 			if(isset($value['money'])){
 				$value['money'] = intval($value['money']);
 			}
@@ -208,9 +208,9 @@ class Ritualthin extends Common
 		$param['start_time'] = strtotime($param['start_time']);
 		Db::startTrans();
 		try{
-			Loader::model('RitualThin')->rtCreate($param);//写入礼薄信息
+			$id = Loader::model('RitualThin')->rtCreate($param);//写入礼薄信息
 			Db::commit();
-			return trueAjax('新增成功');
+			return trueAjax('新增成功',$id);
 		}catch(\Exception $e){
 			Db::rollback();
 			return falseAjax($e->getMessage());

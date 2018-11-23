@@ -68,6 +68,7 @@ class RitualThin extends Model
 	 */
 	public function rtCreate($data)
 	{
-		return $this->commonModel->insert($data);
+		$this->commonModel->insert($data);
+		return $this->getLastInsID();
 	}
 }
