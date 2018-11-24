@@ -59,6 +59,7 @@ class Giftreceive extends Common
 	{
 		$map = [];
 		$map['t.name'] = ['like','%' . $data['name'] . '%'];
+		$map['t.uid'] = ['=',$data['uid']];
 		$field = [
 			't.id','t.name','t.money','t.relation','t.give_time','t.index','t1.name as matter','t1.id as rt_id'
 		];
