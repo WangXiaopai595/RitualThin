@@ -165,7 +165,7 @@ class Ritualthin extends Common
 		$data['gift_give'] = $Giftgive->getGiftgiveList($param);
 
 		foreach($data as &$value){
-			$value = $this->dateFormat($value,'give_time');
+			$value = $this->dateFormat($value,'give_time','.');
 		}
 		return trueAjax('',$data);
 	}
