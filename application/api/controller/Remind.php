@@ -21,6 +21,9 @@ class Remind extends Common
 		$map['uid'] = ['=',$data['uid']];
 		$map['start_time'] = ['>',time()];
 		$result = $this->getRemindList($map);
+		foreach($result as &$value){
+			$value['start_time'] = date('Y-m-d',$value['start_time']);
+		}
 		return $result;
 	}
 
@@ -33,9 +36,12 @@ class Remind extends Common
 	public function getRemindNotExpired()
 	{
 		$param = Request::instance()->param();
-		$map['uid'] = $param['uid'];
+		$map['uid'] = ['=',$param['uid']];
 		$map['start_time'] = ['>',time()];
 		$result = $this->getRemindList($map);
+		foreach($result as &$value){
+			$value['start_time'] = date('Y.m.d H:i',$value['start_time']);
+		}
 		return trueAjax('',$result);
 	}
 
@@ -48,9 +54,12 @@ class Remind extends Common
 	public function getRemindExpired()
 	{
 		$param = Request::instance()->param();
-		$map['uid'] = $param['uid'];
+		$map['uid'] = ['=',$param['uid']];
 		$map['start_time'] = ['<=',time()];
 		$result = $this->getRemindList($map);
+		foreach($result as &$value){
+			$value['start_time'] = date('Y.m.d H:i',$value['start_time']);
+		}
 		return trueAjax('',$result);
 	}
 
@@ -64,12 +73,9 @@ class Remind extends Common
 	public function getRemindList($map)
 	{
 		$field = [
-			'id','name','start_time','address','event'
+			'id','name','start_time','address','event','phone'
 		];
 		$result = Loader::model('Remind')->getRemindList($map,$field);
-		foreach($result as &$value){
-			$value['start_time'] = date('Y-m-d',$value['start_time']);
-		}
 		return $result;
 	}
 

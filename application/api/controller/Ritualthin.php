@@ -123,7 +123,30 @@ class Ritualthin extends Common
 		$Giftreceive = new Giftreceive();
 		$param = Request::instance()->param();
 		$gift_receive = $Giftreceive->getGiftReceive($param);
-		$result = asciiGroup($this->dateFormat($gift_receive,'give_time'));
+		$res = asciiGroup($this->dateFormat($gift_receive,'give_time','.'));
+		$map['id'] = $param['rt_id'];
+		$map['uid'] = $param['uid'];
+		$field = ['id','name','start_time'];
+		$rt = Loader::model('RitualThin')->rtDetail($map,$field);
+		$rt['start_time'] = date('Y-m-d',$rt['start_time']);
+		unset($map['id']);
+		$map['rt_id'] = $param['rt_id'];
+		$money = intval(Loader::model('GiftReceive')->getGiftReceiveSum($map));
+		$count = Loader::model('GiftReceive')->getGiftReceiveCount($map);
+		$index = 0;
+		$data = [];
+		foreach($res as $k=>$v){
+			$arr = [];
+			$arr['englis_id'] = $index;
+			$arr['ENG'] = $k;
+			$arr['data'] = $v;
+			$data[] = $arr;
+			$index++;
+		}
+		$result['rt'] = $rt;
+		$result['money'] = $money;
+		$result['count'] = $count;
+		$result['receive'] = $data;
 		return trueAjax('',$result);
 	}
 
@@ -138,8 +161,8 @@ class Ritualthin extends Common
 		$Giftgive = new Giftgive();
 		$Giftreceive = new Giftreceive();
 		$param = Request::instance()->param();
-		$data['gift_give'] = $Giftreceive->getGiftReceive($param);
-		$data['gift_receive'] = $Giftgive->getGiftgiveList($param);
+		$data['gift_receive'] = $Giftreceive->searchReceive($param);
+		$data['gift_give'] = $Giftgive->getGiftgiveList($param);
 
 		foreach($data as &$value){
 			$value = $this->dateFormat($value,'give_time');

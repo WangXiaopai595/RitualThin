@@ -49,6 +49,24 @@ class Giftreceive extends Common
 	}
 
 	/**
+	 * 搜索
+	 * created by:Mp_Lxj
+	 * @date:2018/11/25 2:41
+	 * @param $data
+	 * @return mixed
+	 */
+	public function searchReceive($data)
+	{
+		$map = [];
+		$map['t.name'] = ['like','%' . $data['name'] . '%'];
+		$field = [
+			't.id','t.name','t.money','t.relation','t.give_time','t.index','t1.name as matter','t1.id as rt_id'
+		];
+		$result = Loader::model('GiftReceive')->searchReceive($map,$field);
+		return $result;
+	}
+
+	/**
 	 * 更新收礼内容信息
 	 * created by:Mp_Lxj
 	 * @date:2018/11/5 20:24
@@ -103,7 +121,7 @@ class Giftreceive extends Common
 	{
 		$param = Request::instance()->param();
 		$param['time'] = time();
-		$param['give_time'] = strtotime($param['give_time']);
+		$param['give_time'] = isset($param['give_time']) ? strtotime($param['give_time']) : time();
 		$param['index'] = GetFirst($param['name']);
 		Db::startTrans();
 		try{

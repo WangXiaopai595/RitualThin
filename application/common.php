@@ -50,6 +50,8 @@ function uploadFile($file){
 			$info = $v->validate($config)->move($path,$fileName);
 			if($info){
 				$result[$k] = '/upload/'.$savePath.'/'.$info->getSaveName();
+			}else{
+				exit(json_encode(['status'=>0,'msg'=>$v->getError()]));
 			}
 		}
 	}

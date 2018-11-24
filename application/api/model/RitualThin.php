@@ -71,4 +71,17 @@ class RitualThin extends Model
 		$this->commonModel->insert($data);
 		return $this->getLastInsID();
 	}
+
+	/**
+	 * 礼薄详情
+	 * created by:Mp_Lxj
+	 * @date:2018/11/23 18:41
+	 * @param $map
+	 * @param $field
+	 * @return array|false|mixed|\PDOStatement|string|Model
+	 */
+	public function rtDetail($map,$field)
+	{
+		return $this->commonModel->where($map)->field($field)->find();
+	}
 }

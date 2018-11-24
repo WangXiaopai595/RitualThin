@@ -33,10 +33,20 @@ class Giftgive extends Common
 		$Ritualthin = new Ritualthin();
 		$param = Request::instance()->param();
 		$gift_give = $this->getGiftgiveList($param);//送礼列表
-		$result = asciiGroup($Ritualthin->dateFormat($gift_give,'give_time'));//送礼列表A-Z分类
+		$result = asciiGroup($Ritualthin->dateFormat($gift_give,'give_time','.'));//送礼列表A-Z分类
+		$index = 0;
+		$data = [];
+		foreach($result as $k=>$v){
+			$arr = [];
+			$arr['englis_id'] = $index;
+			$arr['ENG'] = $k;
+			$arr['data'] = $v;
+			$data[] = $arr;
+			$index++;
+		}
 		$res['money'] = $this->giftGiveTotal($gift_give);//礼金统计
 		$res['count'] = count($gift_give);//送礼总数
-		$res['gift_give'] = $result;
+		$res['gift_give'] = $data;
 		return trueAjax('',$res);
 	}
 
