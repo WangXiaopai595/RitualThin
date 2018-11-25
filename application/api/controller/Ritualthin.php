@@ -161,8 +161,9 @@ class Ritualthin extends Common
 		$Giftgive = new Giftgive();
 		$Giftreceive = new Giftreceive();
 		$param = Request::instance()->param();
-		$data['gift_receive'] = $Giftreceive->searchReceive($param);
-		$data['gift_give'] = $Giftgive->getGiftgiveList($param);
+		//命名写反了  意外意外
+		$data['gift_give'] = $Giftreceive->searchReceive($param);//收礼
+		$data['gift_receive'] = $Giftgive->getGiftgiveList($param);//送礼
 
 		foreach($data as &$value){
 			$value = $this->dateFormat($value,'give_time','.');

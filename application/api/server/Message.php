@@ -13,6 +13,13 @@ use think\Config;
 
 class Message
 {
+	/**
+	 * 发送短信验证码
+	 * created by:Mp_Lxj
+	 * @date:2018/11/25 13:56
+	 * @param $phone
+	 * @return array
+	 */
 	public function sendMsg($phone)
 	{
 		$config = Config::get('msg');
@@ -20,7 +27,7 @@ class Message
 		$data = [
 			'content' => '您的验证码是：'.$rand,
 			'mobile' => $phone,
-			'sign' => '微礼薄',
+			'sign' => '宴会以后',
 			'templateType' => 1,
 			'token' => $config['token'],
 			'uid' => $config['uid']
@@ -28,6 +35,32 @@ class Message
 		$res = $this->sendCurl($config['msgUrl'],json_encode($data),['Content-Type: application/json']);
 		if(!$res){
 			return ['status' => true,'msg' => $rand];
+		}else{
+			return ['status' => false,'msg' => $res['msg']];
+		}
+	}
+
+	/**
+	 * 发送提醒
+	 * created by:Mp_Lxj
+	 * @date:2018/11/25 14:00
+	 * @param $data
+	 * @return array
+	 */
+	public function sendRemind($data)
+	{
+		$config = Config::get('msg');
+		$data = [
+			'content' => '今天'. $data['name'] .'有'. $data['event'] .'，请规划好您的时间安排哦~',
+			'mobile' => $data['phone'],
+			'sign' => '宴会以后',
+			'templateType' => 1,
+			'token' => $config['token'],
+			'uid' => $config['uid']
+		];
+		$res = $this->sendCurl($config['msgUrl'],json_encode($data),['Content-Type: application/json']);
+		if(!$res){
+			return ['status' => true];
 		}else{
 			return ['status' => false,'msg' => $res['msg']];
 		}
