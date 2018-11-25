@@ -28,9 +28,9 @@ class Remind extends Model
 	 * @param $field
 	 * @return false|\PDOStatement|string|\think\Collection.
 	 */
-	public function getRemindList($map,$field)
+	public function getRemindList($map,$field,$order = 'start_time desc')
 	{
-		return $this->commonModel->where($map)->field($field)->order('start_time desc')->select();
+		return $this->commonModel->where($map)->field($field)->order($order)->select();
 	}
 
 	/**

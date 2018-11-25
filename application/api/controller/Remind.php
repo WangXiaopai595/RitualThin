@@ -20,7 +20,7 @@ class Remind extends Common
 	{
 		$map['uid'] = ['=',$data['uid']];
 		$map['start_time'] = ['>',time()];
-		$result = $this->getRemindList($map);
+		$result = $this->getRemindList($map,'start_time');
 		foreach($result as &$value){
 			$value['start_time'] = date('Y-m-d',$value['start_time']);
 		}
@@ -38,7 +38,7 @@ class Remind extends Common
 		$param = Request::instance()->param();
 		$map['uid'] = ['=',$param['uid']];
 		$map['start_time'] = ['>',time()];
-		$result = $this->getRemindList($map);
+		$result = $this->getRemindList($map,'start_time');
 		foreach($result as &$value){
 			$value['start_time'] = date('Y.m.d H:i',$value['start_time']);
 		}
@@ -70,12 +70,12 @@ class Remind extends Common
 	 * @param $map
 	 * @return mixed
 	 */
-	public function getRemindList($map)
+	public function getRemindList($map,$order = 'start_time desc')
 	{
 		$field = [
 			'id','name','start_time','address','event','phone'
 		];
-		$result = Loader::model('Remind')->getRemindList($map,$field);
+		$result = Loader::model('Remind')->getRemindList($map,$field,$order);
 		return $result;
 	}
 

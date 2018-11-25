@@ -51,7 +51,7 @@ class Message
 	{
 		$config = Config::get('msg');
 		$data = [
-			'content' => '今天'. $data['name'] .'有'. $data['event'] .'，请规划好您的时间安排哦~',
+			'content' => '您好！今天是'. $data['name'] .'在：'. $data['address'] .'，举行'. $data['event'] .'的日子，请别忘记及时前往赴约哦。',
 			'mobile' => $data['phone'],
 			'sign' => '宴会以后',
 			'templateType' => 1,

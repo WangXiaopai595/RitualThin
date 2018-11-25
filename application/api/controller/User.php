@@ -28,7 +28,7 @@ class User extends Controller
 	{
 		$map['start_time'] = ['between',[time(),time() + 60*60*2]];
 		$map['is_remind'] = ['=',0];
-		$field = ['id','name','phone','event'];
+		$field = ['id','name','phone','event','address'];
 		$remind = Loader::model('Remind')->getRemindList($map,$field);
 		foreach($remind as $value){
 			if($value['phone']){
