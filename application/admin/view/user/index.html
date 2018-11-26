@@ -30,6 +30,7 @@
 							<th>收礼人数</th>
 							<th>送礼人数</th>
 							<th>注册提醒数</th>
+							<th>手机号</th>
 							<th>状态</th>
 							<th>操作</th>
 						</tr>
@@ -45,6 +46,7 @@
 								<td>{$vo.GiftReceiveCount}</td>
 								<td>{$vo.GiftGiveCount}</td>
 								<td>{$vo.RemindCount}</td>
+								<td>{$vo.phone}</td>
 								<td class="status">
 									{if condition="in_array('user/userstatus',$operable)"}
 										{if condition="$vo['status'] eq 1"}

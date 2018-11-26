@@ -147,7 +147,9 @@ class Remind extends Common
 			Cache::rm('validate_code_' . $data['phone']);
 			$map['id'] = $data['uid'];
 			$user['phone'] = $data['phone'];
-			Loader::model('User')->userUpdate($map,$user);
+			if($data['phone']){
+				Loader::model('User')->userUpdate($map,$user);
+			}
 		}
 		unset($data['code']);
 		unset($data['is_check']);
