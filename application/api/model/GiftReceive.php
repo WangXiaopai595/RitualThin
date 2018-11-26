@@ -106,7 +106,7 @@ class GiftReceive extends Model
 	{
 		return $this->commonModel
 			->alias('t')
-			->join('ritual_thin t1','t.rt_id = t1.id','LEFT')
+			->join('__RITUAL_THIN__ t1','t.rt_id = t1.id','LEFT')
 			->where($map)
 			->field($field)
 			->order('index')
