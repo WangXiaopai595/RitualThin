@@ -58,7 +58,7 @@ class GiftReceive extends Model
             'id','name','give_time','money','relation'
         ];
         $map = [];
-        if($param['id']){
+        if($param['rt_id']){
             $map['rt_id'] = ['=',$param['rt_id']];
         }
         if($param['name']){
