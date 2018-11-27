@@ -160,7 +160,7 @@ class Index extends Controller
 		$param = Request::instance()->param();
 		$total = [];
 		//总数统计
-		$map['time'] = ['between',[strtotime($param['date_start']),strtotime($param['date_end'])]];
+		$map['time'] = ['between',[strtotime($param['date_start']),strtotime($param['date_end']) + 86400]];
 		$total['user'] = Loader::model('User')->getUserCount($map);
 		$total['rt'] = Loader::model('RitualThin')->getRitualThinCount($map);
 		return trueAjax('',$total);
