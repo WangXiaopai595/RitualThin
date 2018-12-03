@@ -7,6 +7,7 @@
  * @return null|string
  */
 function GetFirst($str){
+	$str = mb_substr($str,0,1);
 	if(empty($str)){return '';}
 	if(is_numeric($str{0})) return $str{0};// 如果是数字开头 则返回数字
 	$fchar=ord($str{0});
